@@ -1,14 +1,14 @@
 @font-face {
-font-family:Game of Thrones;
-src: url("fonts/Game of Thrones.ttf");
+font-family:"Game of Thrones";
+src: url("./fonts/Game of Thrones.ttf");
 }
 @font-face {
-font-family:OpenSans;
-src: url("fonts/OpenSans-Regular.ttf");
+font-family:"OpenSans";
+src: url("./fonts/OpenSans-Regular.ttf");
 }
 @font-face {
-font-family:EBGaramond;
-src: url("fonts/EBGaramond08-Regular.ttf");
+font-family:"EBGaramond";
+src: url("./fonts/EBGaramond08-Regular.ttf");
 }
 
 html {
