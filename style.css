@@ -1,20 +1,18 @@
 @font-face {
-font-family:"Game of Thrones";
-src: url("./fonts/Game of Thrones.ttf");
+  font-family:"Game of Thrones";
+  src: url("./fonts/Game of Thrones.ttf");
 }
 @font-face {
-font-family:"OpenSans";
-src: url("./fonts/OpenSans-Regular.ttf");
+  font-family:"OpenSans";
+  src: url("./fonts/OpenSans-Regular.ttf");
 }
 @font-face {
-font-family:"EBGaramond";
-src: url("./fonts/EBGaramond08-Regular.ttf");
+  font-family:"EBGaramond";
+  src: url("./fonts/EBGaramond08-Regular.ttf");
 }
-
 html {
   background-image: url("images/darknoise.png");
 }
-
 body {
   display: flex;
   min-height: 100vh;
@@ -22,20 +20,25 @@ body {
 html, body {
   margin: 0;
 }
-
+.invisible {
+  display: none!important;
+}
+.wrong_data {
+  -moz-box-shadow:0 0 10px red;
+  -webkit-box-shadow:0 0 10px red;
+  box-shadow:0 0 10px red;
+}
 .section-left, .section-right {
-    width: 50%;
+  width: 50%;
 }
 .section-left {
   background:url("images/maxresdefault.jpg") center center ;
   background-size: cover;
 }
-
 .section-right {
   display: grid;
   align-items: center;
 }
-
 .head {
   margin-bottom: 50px;
   text-align: center;
@@ -55,7 +58,6 @@ form {
 .box {
   display: grid;
 }
-
 .box_label {
   font-family:  "EBGaramond", serif;
   font-size: 1.4em;
@@ -71,6 +73,14 @@ form {
 .box_textarea {
   resize: none;
 }
+.box_email {
+  outline: none;
+}
+.box_email:-webkit-autofill {
+  -webkit-box-shadow: inset 0 0 0 50px #202020 !important;
+  -webkit-text-fill-color: #757575 !important;
+  color: #757575 !important;
+}
 .box_core{
   outline: none;
   font-family: "OpenSans", sans-serif;
@@ -83,7 +93,6 @@ form {
 #select {
   color: white;
 }
-
 .button {
   font-family: "OpenSans", sans-serif;
   font-size: 1.2em;
@@ -114,12 +123,10 @@ form {
   border-left-style: solid;
   border-left-width: 2px;
 }
-
 .checkbox_label {
   margin-top: 50px;
   margin-left: 10px;
 }
-
 .checkbox_input{
   cursor: pointer;
   position: absolute;
@@ -128,7 +135,7 @@ form {
   width: 9em;
   height: 1em;
 }
- .checkbox_label::before {
+.checkbox_label::before {
   font-size: 0.7em;
   margin-right: 15px;
   margin-top: -10px;
@@ -142,7 +149,6 @@ form {
   height: 1em;
   background-color: #d3bb89;
 }
-
 .checkbox_input:checked + .checkbox_label::before{
   padding-left: 0.3em;
   padding-bottom: 0.3em;
@@ -153,7 +159,6 @@ form {
   background-color: #d3bb89;
   color: white;
 }
-
 hr {
   margin-bottom: 20px;
   width: 100%;
