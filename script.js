@@ -1,6 +1,9 @@
 
 
 window.onload = init;
+//expression from https://www.regular-expressions.info/email.html
+const mailPatern =/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+const passPatern = /^\S{8,}$/;
 
 function init(){
   box_email.addEventListener("blur", validateMail);
@@ -9,28 +12,24 @@ function init(){
 }
 
 function send(){
-  var reg =/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-  var email = document.sign.box_email.value;
-  if (!reg.test(email)){
-    // alert('Incorrect email.');
+  const email = document.getElementById('box_email').value;
+  if (!mailPatern.test(email)){
+    document.getElementById('box_email').classList.add('wrong_data');
+  }
+  const pass = document.getElementById('box_password').value;
+  if (!passPatern.test(pass)){
+    document.getElementById('box_password').classList.add('wrong_data');
     return;
   }
-  var pass = document.getElementById('box_password').value;
-  var pass_patern = /^\S{8,}$/;
-  if (!pass_patern.test(pass)){
-    // alert('Password to short.');
-    return;
-  }
-  var before = document.getElementById('section_before');
-  var after = document.getElementById('section_after');
+  let before = document.getElementById('section_before');
+  let after = document.getElementById('section_after');
   before.classList.add('invisible');
   after.classList.remove('invisible');
 }
 
 function validatePassword(){
-  var pass = document.getElementById('box_password').value;
-  var pass_patern = /^\S{8,}$/;
-  if (!pass_patern.test(pass)){
+  const pass = document.getElementById('box_password').value;
+  if (!passPatern.test(pass)){
     document.getElementById('box_password').classList.add('wrong_data');
   }else {
     document.getElementById('box_password').classList.remove('wrong_data');
@@ -39,13 +38,13 @@ function validatePassword(){
 }
 
 function validateMail(){
-  var mail = document.getElementById('box_email').value;
-  //expression from https://www.regular-expressions.info/email.html
-  var reg =/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-  if (!reg.test(mail)){
+  const mail = document.getElementById('box_email').value;
+  if (!mailPatern.test(mail)){
     document.getElementById('box_email').classList.add('wrong_data');
+  } else {
+    document.getElementById('box_email').classList.remove('wrong_data');
   }
-  document.getElementById('box_email').oninput = validateMail;
+  box_email.addEventListener("input", validateMail);
 }
 
-var EMBLEMS = ['arryn.jpg', 'baratheon.jpg', 'greyjoy.jpg', 'lanister.jpg', 'stark.jpg', 'targaryen.jpg'];
+const EMBLEMS = ['arryn.jpg', 'baratheon.jpg', 'greyjoy.jpg', 'lanister.jpg', 'stark.jpg', 'targaryen.jpg'];
