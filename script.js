@@ -19,6 +19,8 @@ function send(){
   const pass = document.getElementById('box_password').value;
   if (!passPatern.test(pass)){
     document.getElementById('box_password').classList.add('wrong_data');
+  }
+  if (!mailPatern.test(email)||!passPatern.test(pass)) {
     return;
   }
   let before = document.getElementById('section_before');
