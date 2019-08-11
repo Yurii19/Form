@@ -3,35 +3,39 @@
 window.onload = init;
 
 jQuery(document).ready(function($) {
-  $('#lightSlider').lightSlider({
-    item:1,
-    slideMove:1,
-    speed:100,
-    slideMargin:0,
-    loop:false, 
-  });
 
-  $('.lSPrev').append('<').css({
-    'color': 'white',
-    'font-size': '2.5em'
-  });
-  $('.lSNext').append('>').css({
-    'color': 'white',
-    'font-size': '2.5em'
-  });
-  
-  for (let i = 0; i < EMBLEMS.length; i++) {
-    const flag = '<li><div class="flag-wrapper"><img src="img/'+EMBLEMS[i]+'"></div></li>';
-    $('#lightSlider').append(flag);
-  }
-  $('form').mfs();
+  $(".rslides").responsiveSlides({
+  auto: false,             // Boolean: Animate automatically, true or false
+  speed: 500,            // Integer: Speed of the transition, in milliseconds
+  timeout: 4000,          // Integer: Time between slide transitions, in milliseconds
+  pager: true,           // Boolean: Show pager, true or false
+  nav: true,             // Boolean: Show navigation, true or false
+  random: false,          // Boolean: Randomize the order of the slides, true or false
+  pause: false,           // Boolean: Pause on hover, true or false
+  pauseControls: true,    // Boolean: Pause when hovering controls, true or false
+  prevText: "&laquo;",   // String: Text for the "previous" button
+  nextText: "&raquo;",       // String: Text for the "next" button
+  maxwidth: "",           // Integer: Max-width of the slideshow, in pixels
+  navContainer: "",       // Selector: Where controls should be appended to, default is after the 'ul'
+  manualControls: "",     // Selector: Declare custom pager navigation
+  namespace: "rslides",   // String: Change the default namespace used
+  before: function(){},   // Function: Before callback
+  after: function(){}     // Function: After callback
+});
 
-  $('body>section>form>div>div>ul>li>a').bind('click', function(event) {
-    const flagNumber = $(this).attr('index');
-    const widthImg = $('.flag-wrapper').width();
-    const disposition = -widthImg*(flagNumber-1);
-    if (disposition > 0) disposition = 0;
-    $('#lightSlider').css('transform', 'translate3d('+ disposition +'px, 0px, 0px)');
+  $('select').stbDropdown();
+
+  $('body>section>form>div>div>ul>li').click( function() {
+    while (true){
+      let flagNumber = $(this).attr('value');
+      let curentFlag = $('.rslides1_on').attr('id');
+      let curentId = curentFlag.charAt(curentFlag.length-1);
+      if(flagNumber === curentId){
+        break;
+      }
+      $('.next').click();
+    }
+
   });
 
 });
@@ -39,11 +43,13 @@ jQuery(document).ready(function($) {
 //expression from https://www.regular-expressions.info/email.html
 const mailPatern =/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 const passPatern = /^\S{8,}$/;
+const namePattern = /^\w+$/;
 
 function init(){
   box_email.addEventListener("blur", validateMail);
   sign_up.addEventListener("click", send);
   box_password.addEventListener("blur", validatePassword);
+  nameinput.addEventListener("blur", validateName);
 }
 
 function send(){
@@ -62,6 +68,16 @@ function send(){
   let after = document.getElementById('section_after');
   before.classList.add('invisible');
   after.classList.remove('invisible');
+}
+
+function validateName(){
+  const name = document.getElementById('nameinput').value;
+  if (!namePattern.test(name)){
+    document.getElementById('nameinput').classList.add('wrong_data');
+  }else {
+    document.getElementById('nameinput').classList.remove('wrong_data');
+  }
+  nameinput.addEventListener("input", validateName);
 }
 
 function validatePassword(){
@@ -84,4 +100,11 @@ function validateMail(){
   box_email.addEventListener("input", validateMail);
 }
 
-const EMBLEMS = ['arryn.jpg', 'baratheon.jpg', 'greyjoy.jpg', 'lanister.jpg', 'stark.jpg', 'targaryen.jpg'];
+const HOUSES = [
+{ title: 'House Arryn', emblem: 'arryn.jpg' },
+{ title: 'House Baratheon', emblem:'baratheon.jpg' }, 
+{ title: 'House Greyjoy', emblem:'greyjoy.jpg' }, 
+{ title: 'House Lanister', emblem:'lanister.jpg' }, 
+{ title: 'House Stark', emblem:'stark.jpg' }, 
+{ title: 'House Targaryen', emblem:'targaryen.jpg' }
+];

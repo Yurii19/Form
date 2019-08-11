@@ -14,11 +14,13 @@ html {
   background-image: url("../img/darknoise.png");
 }
 body {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   min-height: 100vh;
 }
 html, body {
   margin: 0;
+  padding: 0;
 }
 .invisible {
   display: none!important;
@@ -29,15 +31,16 @@ html, body {
   box-shadow:0 0 10px red;
 }
 .section-left, .section-right {
-  width: 50%;
+  width: 100%;
 }
 .section-left {
- /* background:url("../img/maxresdefault.jpg") center center ;*/
   background-size: cover;
 }
 .section-right {
   display: grid;
   align-items: center;
+}
+.slider-container {
 }
 .head {
   margin-bottom: 50px;
@@ -52,18 +55,14 @@ html, body {
 }
 img{
  padding-top: 200px;
-  width: 100%;
+ width: 100%;
 }
 .flag-wrapper{
   height: 97vh;
   justify-content: center;
- /* border: 2px solid red;*/
- /* background-color: black;*/
 }
 li{
-
- /* border: 2px solid blue;*/
-  height: 100%;
+ height: 100%;
 }
 .slider-right {
   border-radius: 50%;
