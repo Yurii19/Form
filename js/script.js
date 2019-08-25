@@ -25,18 +25,17 @@ jQuery(document).ready(function($) {
 
   $('select').stbDropdown();
 
-  $('body>section>form>div>div>ul>li').click( function() {
-    while (true){
-      let flagNumber = $(this).attr('value');
-      let curentFlag = $('.rslides1_on').attr('id');
-      let curentId = curentFlag.charAt(curentFlag.length-1);
-      if(flagNumber === curentId){
-        break;
-      }
-      $('.next').click();
-    }
+  $('.option_select').click( function() {
+    const curentOption =  $(this).attr('value');
+    const curentSlide = $('.rslides1_on').attr('id');
+    let curentId = curentSlide.charAt(curentSlide.length - 1);
 
-  });
+    while (curentOption != curentId) {
+     $('.next').click();
+     let nextSlide = $('.rslides1_on').attr('id');
+     curentId = nextSlide.charAt(nextSlide.length - 1);
+   }
+ });
 
 });
 
@@ -45,66 +44,74 @@ const mailPatern =/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+
 const passPatern = /^\S{8,}$/;
 const namePattern = /^\w+$/;
 
-function init(){
-  box_email.addEventListener("blur", validateMail);
-  sign_up.addEventListener("click", send);
-  box_password.addEventListener("blur", validatePassword);
-  nameinput.addEventListener("blur", validateName);
-}
+function init() {
 
-function send(){
-  const email = document.getElementById('box_email').value;
-  if (!mailPatern.test(email)){
-    document.getElementById('box_email').classList.add('wrong_data');
-  }
-  const pass = document.getElementById('box_password').value;
-  if (!passPatern.test(pass)){
-    document.getElementById('box_password').classList.add('wrong_data');
-  }
-  if (!mailPatern.test(email)||!passPatern.test(pass)) {
-    return;
-  }
-  let before = document.getElementById('section_before');
-  let after = document.getElementById('section_after');
-  before.classList.add('invisible');
-  after.classList.remove('invisible');
-}
+  const userMail = document.getElementById('box_email');
+  userMail.addEventListener('blur', validateMail);
 
-function validateName(){
-  const name = document.getElementById('nameinput').value;
-  if (!namePattern.test(name)){
-    document.getElementById('nameinput').classList.add('wrong_data');
-  }else {
-    document.getElementById('nameinput').classList.remove('wrong_data');
-  }
-  nameinput.addEventListener("input", validateName);
-}
+  const signUp = document.getElementById('sign_up');
+  signUp.addEventListener('click', send);
 
-function validatePassword(){
-  const pass = document.getElementById('box_password').value;
-  if (!passPatern.test(pass)){
-    document.getElementById('box_password').classList.add('wrong_data');
-  }else {
-    document.getElementById('box_password').classList.remove('wrong_data');
-  }
-  box_password.addEventListener("input", validatePassword);
-}
+  const userPassword = document.getElementById('box_password');
+  userPassword.addEventListener('blur', validatePassword);
 
-function validateMail(){
-  const mail = document.getElementById('box_email').value;
-  if (!mailPatern.test(mail)){
-    document.getElementById('box_email').classList.add('wrong_data');
-  } else {
-    document.getElementById('box_email').classList.remove('wrong_data');
-  }
-  box_email.addEventListener("input", validateMail);
-}
+  const userName = document.getElementById('nameinput');
+  userName.addEventListener('blur', validateName);
 
-const HOUSES = [
-{ title: 'House Arryn', emblem: 'arryn.jpg' },
-{ title: 'House Baratheon', emblem:'baratheon.jpg' }, 
-{ title: 'House Greyjoy', emblem:'greyjoy.jpg' }, 
-{ title: 'House Lanister', emblem:'lanister.jpg' }, 
-{ title: 'House Stark', emblem:'stark.jpg' }, 
-{ title: 'House Targaryen', emblem:'targaryen.jpg' }
-];
+
+  function send() {
+    const email = userMail.value;
+    if (!mailPatern.test(email)){
+      userMail.classList.add('wrong_data');
+    }
+    const pass = userPassword.value;
+    if (!passPatern.test(pass)){
+      userPassword.classList.add('wrong_data');
+    }
+    if (!mailPatern.test(email)||!passPatern.test(pass)) {
+      return;
+    }
+    document.getElementById('sign-up-section').classList.add('invisible');
+    document.getElementById('section-users-data').classList.remove('invisible');
+  }
+
+  function validateName() {
+    const name = userName.value;
+    if (!namePattern.test(name)){
+      userName.classList.add('wrong_data');
+    } else {
+      userName.classList.remove('wrong_data');
+    }
+    userName.addEventListener('input', validateName);
+  }
+
+  function validatePassword() {
+    const pass = userPassword.value;
+    if (!passPatern.test(pass)) {
+      userPassword.classList.add('wrong_data');
+    } else {
+      userPassword.classList.remove('wrong_data');
+    }
+    userPassword.addEventListener('input', validatePassword);
+  }
+
+  function validateMail(){
+    const mail = userMail.value;
+    if (!mailPatern.test(mail)) {
+      userMail.classList.add('wrong_data');
+    } else {
+      userMail.classList.remove('wrong_data');
+    }
+    userMail.addEventListener('input', validateMail);
+  }
+
+  const HOUSES = [
+  { title: 'House Arryn', emblem: 'arryn.jpg' },
+  { title: 'House Baratheon', emblem:'baratheon.jpg' }, 
+  { title: 'House Greyjoy', emblem:'greyjoy.jpg' }, 
+  { title: 'House Lanister', emblem:'lanister.jpg' }, 
+  { title: 'House Stark', emblem:'stark.jpg' }, 
+  { title: 'House Targaryen', emblem:'targaryen.jpg' }
+  ];
+
+}
