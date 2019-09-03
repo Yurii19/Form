@@ -44,74 +44,96 @@ const mailPatern =/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+
 const passPatern = /^\S{8,}$/;
 const namePattern = /^\w+$/;
 
-function init() {
+function init(){
 
   const userMail = document.getElementById('box_email');
-  userMail.addEventListener('blur', validateMail);
-
+  if (userMail) {
+    userMail.addEventListener('blur', validateMail);
+  }
+  
   const signUp = document.getElementById('sign_up');
-  signUp.addEventListener('click', send);
-
+  if (signUp) {
+    signUp.addEventListener('click', send);
+  }
+  
   const userPassword = document.getElementById('box_password');
-  userPassword.addEventListener('blur', validatePassword);
-
+  if (userPassword) {
+     userPassword.addEventListener('blur', validatePassword);
+  }
+ 
   const userName = document.getElementById('nameinput');
-  userName.addEventListener('blur', validateName);
-
-
-  function send() {
-    const email = userMail.value;
-    if (!mailPatern.test(email)){
-      userMail.classList.add('wrong_data');
-    }
-    const pass = userPassword.value;
-    if (!passPatern.test(pass)){
-      userPassword.classList.add('wrong_data');
-    }
-    if (!mailPatern.test(email)||!passPatern.test(pass)) {
-      return;
-    }
-    document.getElementById('sign-up-section').classList.add('invisible');
-    document.getElementById('section-users-data').classList.remove('invisible');
+  if (userName) {
+  userName.addEventListener('blur', validateName);   
   }
+  // userName.addEventListener('blur', validateName);
 
-  function validateName() {
-    const name = userName.value;
-    if (!namePattern.test(name)){
-      userName.classList.add('wrong_data');
-    } else {
-      userName.classList.remove('wrong_data');
-    }
-    userName.addEventListener('input', validateName);
+
+
+function send() {
+  const email = userMail.value;
+  if (!mailPatern.test(email)){
+    userMail.classList.add('wrong_data');
   }
-
-  function validatePassword() {
-    const pass = userPassword.value;
-    if (!passPatern.test(pass)) {
-      userPassword.classList.add('wrong_data');
-    } else {
-      userPassword.classList.remove('wrong_data');
-    }
-    userPassword.addEventListener('input', validatePassword);
+  const pass = userPassword.value;
+  if (!passPatern.test(pass)){
+    userPassword.classList.add('wrong_data');
   }
-
-  function validateMail(){
-    const mail = userMail.value;
-    if (!mailPatern.test(mail)) {
-      userMail.classList.add('wrong_data');
-    } else {
-      userMail.classList.remove('wrong_data');
-    }
-    userMail.addEventListener('input', validateMail);
+  if (!mailPatern.test(email)||!passPatern.test(pass)) {
+    return;
   }
+  // document.getElementById('sign-up-section').classList.add('invisible');
+  // document.getElementById('section-users-data').classList.remove('invisible');
+}
 
-  const HOUSES = [
-  { title: 'House Arryn', emblem: 'arryn.jpg' },
-  { title: 'House Baratheon', emblem:'baratheon.jpg' }, 
-  { title: 'House Greyjoy', emblem:'greyjoy.jpg' }, 
-  { title: 'House Lanister', emblem:'lanister.jpg' }, 
-  { title: 'House Stark', emblem:'stark.jpg' }, 
-  { title: 'House Targaryen', emblem:'targaryen.jpg' }
-  ];
+function validateName() {
+  const name = userName.value;
+  if (!namePattern.test(name)){
+    userName.classList.add('wrong_data');
+  } else {
+    userName.classList.remove('wrong_data');
+  }
+  userName.addEventListener('input', validateName);
+}
 
+function validatePassword() {
+  const pass = userPassword.value;
+  if (!passPatern.test(pass)) {
+    userPassword.classList.add('wrong_data');
+  } else {
+    userPassword.classList.remove('wrong_data');
+  }
+  userPassword.addEventListener('input', validatePassword);
+}
+
+function validateMail(){
+  const mail = userMail.value;
+  if (!mailPatern.test(mail)) {
+    userMail.classList.add('wrong_data');
+  } else {
+    userMail.classList.remove('wrong_data');
+  }
+  userMail.addEventListener('input', validateMail);
+}
+
+
+const HOUSES = [
+{ 
+  title: 'House Arryn', emblem: 'arryn.jpg' 
+},
+{ 
+  title: 'House Baratheon', emblem:'baratheon.jpg' 
+}, 
+{
+ title: 'House Greyjoy', emblem:'greyjoy.jpg' 
+}, 
+{ 
+  title: 'House Lanister', emblem:'lanister.jpg'
+}, 
+{ 
+  title: 'House Stark', emblem:'stark.jpg' 
+}, 
+{
+ title: 'House Targaryen', emblem:'targaryen.jpg'
+}
+];
 }

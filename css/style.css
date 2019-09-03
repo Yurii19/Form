@@ -190,3 +190,6 @@ hr {
   height: 1px;
   border-color: #d3bb89;
 }
+.error-php {
+  color: red;
+}
