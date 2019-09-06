@@ -34,7 +34,7 @@ html, body {
   width: 100%;
 }
 .section-left {
-  background-size: cover;
+  /*background-size: cover;*/
 }
 .section-right {
   display: grid;
@@ -54,8 +54,11 @@ html, body {
  list-style-type: none;
 }
 img{
- padding-top: 200px;
+ padding-top: 20vh;
  width: 100%;
+}
+.rslides_tabs{
+  height: 0;
 }
 .flag-wrapper{
   height: 97vh;

@@ -33,11 +33,8 @@ if (isset($_POST['submitsave'])) {
 	
 	if (isset($_POST['username']) & validateName($_POST['username'])) {
 		$json_file['name'] = $_POST['username'];
-	// } else {
-	// 	$_SESSION['error_name'] = 'Enter your name';
 	}
 	echo implode('|', $json_file).'<br>';
-	// echo $_SESSION['error_select'].' -> '.$_SESSION['error_info'].' -> '.$_SESSION['error_name'];
 	if ( isset($_SESSION['error_select'])||isset($_SESSION['error_info'])||isset($_SESSION['error_name']) ) {
 		header('Location: form.php');
 		return;
@@ -48,18 +45,8 @@ if (isset($_POST['submitsave'])) {
 	
 }
 
-
-
-
-
-
-
 if (isset($_POST['submitsign'])) {
-	// if (isset($_SESSION['user_mail'] )) {
-	// 	unset($_SESSION['user_mail'] );
-	// }
 
-	// $_SESSION['userID'] = $_POST['email'];
 	$arr_userdata = $profile;
 
 	if ( validateMail( $_POST['email'])) {
@@ -96,7 +83,6 @@ function resetErrors($list) {
 	for ($i=0; $i < count($list); $i++) { 
 		$the_error = $list[$i];
 		if (isset($_SESSION[$the_error])) {
-			// echo $the_error.'<br>';
 			unset($_SESSION[$the_error]);
 		}
 	}
@@ -109,6 +95,9 @@ function validateMail($themail) {
 	if (isset($users[$profile])) {
 		$_SESSION['erorr_mail'] = 'The email already exist';
 		return false;
+	} else if ($themail === ''){
+		$_SESSION['error_mail'] = 'Input an email';
+		return false;	
 	} else if(preg_match($mailPatern, $themail)) {
 		$_SESSION['user_mail'] = $themail;
 		return true;
@@ -119,11 +108,14 @@ function validateMail($themail) {
 }
 
 function validatePassword($pass) {
-	$passPatern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,25}$/';
+	$passPatern = '/^\S{8,}$/';
 	if (preg_match($passPatern, $pass)) {
 		return true;
-	} else if ( strlen($pass) < 8 ) {
-		$_SESSION['error_pasword'] = 'Password to short';
+	} else if ($pass === ''){
+		$_SESSION['error_pasword'] = 'Input a assword';
+		return false;
+	}else if ( strlen($pass) < 8 ) {
+		$_SESSION['error_pasword'] = 'Password too short';
 		return false;
 	} else {
 		$_SESSION['error_pasword'] = 'Incorrect password';
@@ -137,7 +129,7 @@ function validateName($name) {
 		$_SESSION['error_name'] = 'Input a name';
 		return false;
 	} else if (strlen($name) < 4) {
-		$_SESSION['error_name'] = 'Name to short';
+		$_SESSION['error_name'] = 'Name too short';
 		return false;
 	}
 	else if (preg_match($namePattern, $name)) {

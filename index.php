@@ -11,14 +11,16 @@ require_once('components/leftsidesection.php');
     <div class="box">
       <label class="box_label" for="email">Enter you email
       </label>
-      <input class="box_email box_core" type="email" name="email" value="
-      <?php if (isset($_SESSION['user_mail'])) echo $_SESSION['user_mail']; unset($_SESSION['user_mail']);  ?>" id="box_email" placeholder="arya@westeros.com">
+      <input class="box_email box_core" type="text" name="email" value="<?php if (isset($_SESSION['user_mail'])) {
+        echo $_SESSION['user_mail'];
+        unset($_SESSION['user_mail']);
+      } ?>" id="box_email" placeholder="arya@westeros.com">
       <?php 
       if (isset($_SESSION['error_mail'])) {
         echo '<div class="error-php">'.$_SESSION['error_mail'].'</div>';
         unset($_SESSION['error_mail']);
-         }
-       ?>
+      }
+      ?>
       <hr>
     </div>
     <?php 
