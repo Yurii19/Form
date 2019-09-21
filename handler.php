@@ -7,44 +7,6 @@ $file_dir = 'users';
 $users = scandir('/'.$file_dir);
 $profile = ['name'=>'','password'=>'', 'mailbox'=>'', 'clan'=>'', 'aboutself'=>'', 'remember'=>false];
 
-
-if (isset($_POST['submitsave'])) {
-
-	resetErrors($ERRORS_LIST);
-
-	$the_file = file_get_contents($_SESSION['file_path']);
-	$json_file = json_decode($the_file, TRUE);	
-
-	if ($_POST['clanselect'] != 'option_select') {
-		echo $_POST['clanselect'] ;
-		$select = $_POST['clanselect'];
-		$json_file['clan'] = $HOUSES[$select];
-	} else {
-		$_SESSION['error_select'] = 'Please, select your clan';
-	}
-	
-	if ($_POST['textinfo'] != '') {
-		echo $_POST['textinfo'];
-		$json_file['aboutself'] = formatJson($_POST['textinfo']);
-		$_SESSION['user_info'] = $_POST['textinfo'];
-	} else {
-		$_SESSION['error_info'] = 'Enter the text';
-	} 
-	
-	if (isset($_POST['username']) & validateName($_POST['username'])) {
-		$json_file['name'] = $_POST['username'];
-	}
-	echo implode('|', $json_file).'<br>';
-	if ( isset($_SESSION['error_select'])||isset($_SESSION['error_info'])||isset($_SESSION['error_name']) ) {
-		header('Location: form.php');
-		return;
-	}
-
-	file_put_contents($_SESSION['file_path'], json_encode($json_file));
-	header('Location: form.php');
-	
-}
-
 if (isset($_POST['submitsign'])) {
 
 	$arr_userdata = $profile;
@@ -88,18 +50,18 @@ function resetErrors($list) {
 	}
 }
 
-function validateMail($themail) {
+function validateMail($email) {
 	$mailPatern ='/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/i';
 	$users = scandir($GLOBALS['file_dir']);
-	$profile = $themail.'.json';
+	$profile = $email.'.json';
 	if (isset($users[$profile])) {
 		$_SESSION['erorr_mail'] = 'The email already exist';
 		return false;
-	} else if ($themail === ''){
+	} else if ($email === ''){
 		$_SESSION['error_mail'] = 'Input an email';
 		return false;	
-	} else if(preg_match($mailPatern, $themail)) {
-		$_SESSION['user_mail'] = $themail;
+	} else if(preg_match($mailPatern, $email)) {
+		$_SESSION['user_mail'] = $email;
 		return true;
 	} else {
 		$_SESSION['error_mail'] = 'Incorrect email';

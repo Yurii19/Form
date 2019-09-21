@@ -7,4 +7,3 @@
   <link rel="stylesheet" href="css/responsiveslides.css"/>
   <link rel="stylesheet" href="css/stb.dropdown.min.css">
 </head>
-<body>

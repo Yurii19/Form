@@ -1,6 +1,7 @@
 <?php 
 require_once('components/startsession.php');
 require_once('components/head.php');
+echo '<body>';
 require_once('components/leftsidesection.php');
 ?>
 

@@ -196,3 +196,8 @@ hr {
 .error-php {
   color: red;
 }
+.error {
+ margin-top: -15px;
+ position: absolute  ;
+ color: red;
+}
